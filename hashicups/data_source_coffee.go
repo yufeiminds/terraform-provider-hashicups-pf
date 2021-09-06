@@ -110,7 +110,7 @@ func (r dataSourceCoffees) Read(ctx context.Context, req tfsdk.ReadDataSourceReq
 	}
 
 	// Sample debug message
-	// To view this message, set the TF_LOG environment variable to DEBUG 
+	// To view this message, set the TF_LOG environment variable to DEBUG
 	// 		`export TF_LOG=DEBUG`
 	// To hide debug message, unset the environment variable
 	// 		`unset TF_LOG`

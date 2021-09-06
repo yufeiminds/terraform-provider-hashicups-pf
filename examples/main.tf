@@ -16,6 +16,11 @@ resource "hashicups_order" "edu" {
   items = [{
     coffee = {
       id = 3
+
+      ingredients = [{
+        name = "sugar"
+      }]
+
     }
     quantity = 2
     }, {

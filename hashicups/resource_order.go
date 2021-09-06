@@ -20,18 +20,18 @@ func (r resourceOrderType) GetSchema(_ context.Context) (schema.Schema, []*tfpro
 	return schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": {
-				Type:     types.StringType,
+				Type: types.StringType,
 				// When Computed is true, the provider will set value --
 				// the user cannot define the value
 				Computed: true,
 			},
 			"last_updated": {
-				Type: types.StringType,
+				Type:     types.StringType,
 				Computed: true,
 			},
 			"items": {
-				// If Required is true, Terraform will throw error if user 
-				// doesn't specify value 
+				// If Required is true, Terraform will throw error if user
+				// doesn't specify value
 				// If Optional is true, user can choose to supply a value
 				Required: true,
 				Attributes: schema.ListNestedAttributes(map[string]schema.Attribute{
@@ -65,6 +65,27 @@ func (r resourceOrderType) GetSchema(_ context.Context) (schema.Schema, []*tfpro
 							"image": {
 								Type:     types.StringType,
 								Computed: true,
+							},
+							"ingredients": {
+								Optional: true,
+								Attributes: schema.ListNestedAttributes(map[string]schema.Attribute{
+									"ingredient_id": {
+										Type:     types.NumberType,
+										Optional: true,
+									},
+									"name": {
+										Type:     types.StringType,
+										Optional: true,
+									},
+									"quantity": {
+										Type:     types.NumberType,
+										Optional: true,
+									},
+									"unit": {
+										Type:     types.StringType,
+										Optional: true,
+									},
+								}, schema.ListNestedAttributesOptions{}),
 							},
 						}),
 					},
@@ -211,7 +232,6 @@ func (r resourceOrder) Read(ctx context.Context, req tfsdk.ReadResourceRequest, 
 		return
 	}
 }
-
 
 // Update resource
 func (r resourceOrder) Update(ctx context.Context, req tfsdk.UpdateResourceRequest, resp *tfsdk.UpdateResourceResponse) {
